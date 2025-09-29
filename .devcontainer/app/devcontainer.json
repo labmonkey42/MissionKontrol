@@ -1,0 +1,55 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
+  "name": "MissionKontrol app",
+  "postCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/app/postCreateCommand.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        // Markdown linting support
+        "davidanson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        // Standardize editor configuration
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        // Support general GitHub features
+        "github.remotehub",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "mhutchie.git-graph",
+        // Support interacting with running devcontainers
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        // Support React Native development
+        "msjsdiag.vscode-react-native",
+        // Support debugging JavaScript code
+        "ms-vscode.js-debug",
+        // Support testing with Jest code
+        "orta.vscode-jest",
+        "naumovs.color-highlight",
+        "zignd.html-css-class-completion"
+      ]
+    }
+  },
+
+  "features": {
+
+  },
+
+  "mounts": [
+    // Support user kubectl configuration
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube,target=/home/vscode/.kube,type=bind,consistency=cached",
+    // Support user SSH configuration
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+  ],
+
+  // Use this environment variable if you need to bind mount your local source code into a new container.
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  }
+}
