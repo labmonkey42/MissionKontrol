@@ -38,7 +38,7 @@
   },
 
   "features": {
-
+    "ghcr.io/devcontainers/features/rust:1": {}
   },
 
   "mounts": [
