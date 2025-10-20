@@ -8,7 +8,7 @@ echo "Done installing npm packages."
 
 echo "Installing Tauri dependencies..."
 sudo apt update
-sudo apt install \
+sudo apt install -y \
   libwebkit2gtk-4.1-dev \
   build-essential \
   curl \
