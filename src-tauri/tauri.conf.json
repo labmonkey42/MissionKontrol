@@ -1,27 +1,25 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "mission-kontrol",
-  "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "decorations": true,
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
+        "title": "Mission Kontrol",
+        "width": 800
+      }
+    ]
+  },
   "build": {
     "frontendDist": "../dist-ui",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
-  },
-  "app": {
-    "windows": [
-      {
-        "title": "Mission Kontrol",
-        "width": 800,
-        "height": 600,
-        "resizable": true,
-        "fullscreen": false
-      }
-    ],
-    "security": {
-      "csp": null
-    }
   },
   "bundle": {
     "active": true,
@@ -33,5 +31,8 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  }
+  },
+  "identifier": "com.tauri.dev",
+  "productName": "mission-kontrol",
+  "version": "0.0.1"
 }

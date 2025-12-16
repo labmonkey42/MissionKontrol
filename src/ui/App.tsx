@@ -1,31 +1,196 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from 'react';
+import logo from './assets/react.svg';
+import { DocumentType } from './Document.tsx';
+import { Menu, Menubar } from '@base-ui-components/react';
+import styles from './App.module.css';
+import './index.module.css';
+import './theme.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface AppProps {
+  location?: string;
+  type?: DocumentType;
 }
 
-export default App
+function App({ location = '', type = DocumentType.File }: AppProps) {
+  return (
+    <div className={styles.App}>
+      <Menubar className={styles.Menubar}>
+        <Menu.Root>
+          <Menu.Trigger className={styles.MenuTrigger}>File</Menu.Trigger>
+          <Menu.Portal>
+            <Menu.Positioner
+              className={styles.MenuPositioner}
+              alignOffset={-1}
+              sideOffset={1}
+            >
+              <Menu.Popup className={styles.MenuPopup}>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  New
+                </Menu.Item>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Open
+                </Menu.Item>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Save
+                </Menu.Item>
+
+                {/* <Menu.SubmenuRoot>
+                  <Menu.SubmenuTrigger className={styles.MenuItem}>
+                    Export
+                    <ChevronRightIcon />
+                  </Menu.SubmenuTrigger>
+                  <Menu.Portal>
+                    <Menu.Positioner alignOffset={-4}>
+                      <Menu.Popup className={styles.MenuPopup}>
+                        <Menu.Item
+                          className={styles.MenuItem}
+                          onClick={handleClick}
+                        >
+                          PDF
+                        </Menu.Item>
+                        <Menu.Item
+                          className={styles.MenuItem}
+                          onClick={handleClick}
+                        >
+                          PNG
+                        </Menu.Item>
+                        <Menu.Item
+                          className={styles.MenuItem}
+                          onClick={handleClick}
+                        >
+                          SVG
+                        </Menu.Item>
+                      </Menu.Popup>
+                    </Menu.Positioner>
+                  </Menu.Portal>
+                </Menu.SubmenuRoot>
+
+                <Menu.Separator className={styles.MenuSeparator} />
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Print
+                </Menu.Item> */}
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu.Root>
+
+        <Menu.Root>
+          <Menu.Trigger className={styles.MenuTrigger}>Edit</Menu.Trigger>
+          <Menu.Portal>
+            <Menu.Positioner
+              className={styles.MenuPositioner}
+              alignOffset={-1}
+              sideOffset={1}
+            >
+              <Menu.Popup className={styles.MenuPopup}>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Cut
+                </Menu.Item>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Copy
+                </Menu.Item>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Paste
+                </Menu.Item>
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu.Root>
+
+        <Menu.Root>
+          <Menu.Trigger className={styles.MenuTrigger}>View</Menu.Trigger>
+          <Menu.Portal>
+            <Menu.Positioner
+              className={styles.MenuPositioner}
+              alignOffset={-1}
+              sideOffset={1}
+            >
+              <Menu.Popup className={styles.MenuPopup}>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Zoom In
+                </Menu.Item>
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Zoom Out
+                </Menu.Item>
+
+                {/* <Menu.SubmenuRoot>
+                  <Menu.SubmenuTrigger className={styles.MenuItem}>
+                    Layout
+                    <ChevronRightIcon />
+                  </Menu.SubmenuTrigger>
+                  <Menu.Portal>
+                    <Menu.Positioner alignOffset={-4} sideOffset={-2}>
+                      <Menu.Popup className={styles.MenuPopup}>
+                        <Menu.Item
+                          className={styles.MenuItem}
+                          onClick={handleClick}
+                        >
+                          Single Page
+                        </Menu.Item>
+                        <Menu.Item
+                          className={styles.MenuItem}
+                          onClick={handleClick}
+                        >
+                          Two Pages
+                        </Menu.Item>
+                        <Menu.Item
+                          className={styles.MenuItem}
+                          onClick={handleClick}
+                        >
+                          Continuous
+                        </Menu.Item>
+                      </Menu.Popup>
+                    </Menu.Positioner>
+                  </Menu.Portal>
+                </Menu.SubmenuRoot> */}
+
+                <Menu.Separator className={styles.MenuSeparator} />
+                <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+                  Full Screen
+                </Menu.Item>
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu.Root>
+
+        <Menu.Root disabled>
+          <Menu.Trigger className={styles.MenuTrigger}>Help</Menu.Trigger>
+        </Menu.Root>
+      </Menubar>
+      <header className={styles.AppHeader}>
+        <img src={logo} className={styles.AppLogo} alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className={styles.AppLink}
+          href="https://reactjs.org"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Learn React & Typescript
+        </a>
+      </header>
+    </div>
+  );
+}
+
+function handleClick(event: React.MouseEvent<HTMLElement>) {
+  console.log(`${event.currentTarget.textContent} clicked`);
+}
+
+// function ChevronRightIcon(props: React.ComponentProps<'svg'>) {
+//   return (
+//     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" {...props}>
+//       <path
+//         d="M6 12L10 8L6 4"
+//         stroke="currentColor"
+//         strokeWidth="1.5"
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//       />
+//     </svg>
+//   );
+// }
+
+export default App;
